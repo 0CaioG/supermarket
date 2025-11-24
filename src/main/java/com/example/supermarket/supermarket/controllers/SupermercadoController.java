@@ -1,6 +1,10 @@
 package com.example.supermarket.supermarket.controllers;
 
+import com.example.supermarket.supermarket.dto.ProdutoPrecoDTO;
+import com.example.supermarket.supermarket.entities.Preco;
+import com.example.supermarket.supermarket.entities.Produto;
 import com.example.supermarket.supermarket.entities.Supermercado;
+import com.example.supermarket.supermarket.services.PrecoService;
 import com.example.supermarket.supermarket.services.SupermercadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +20,9 @@ public class SupermercadoController {
     @Autowired
     private SupermercadoService supermercadoService;
 
+    @Autowired
+    private PrecoService precoService;
+
     @GetMapping
     private List<Supermercado> listarSupermercados(){
         return supermercadoService.listarSupermercados();
@@ -26,6 +33,11 @@ public class SupermercadoController {
         return supermercadoService.encontrarSupermercado(id)
                 .map(supermercado -> new ResponseEntity<>(supermercado, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/{id}/produtos")
+    private List<ProdutoPrecoDTO> listarProdutosVigentes(@PathVariable Long id){
+        return precoService.listarPorVigenciaSupermercado(id);
     }
 
     @PostMapping

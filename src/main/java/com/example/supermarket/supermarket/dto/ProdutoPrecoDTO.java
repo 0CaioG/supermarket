@@ -2,33 +2,22 @@ package com.example.supermarket.supermarket.dto;
 
 import java.time.LocalDateTime;
 
-public class PrecoDTO {
-
-    private Long id;
+public class ProdutoPrecoDTO {
     private Long produto_id;
-    private Long supermercado_id;
-    private Double valor;
+    private String nome_produto;
+    private Double preco_valor;
     private LocalDateTime inicio_vigencia;
     private LocalDateTime fim_vigencia;
 
-    public PrecoDTO(Long id, Long produto_id, Long supermercado_id, Double valor, LocalDateTime inicio_vigencia, LocalDateTime fim_vigencia) {
-        this.id = id;
+    public ProdutoPrecoDTO(Long produto_id,String nome_produto, Double preco_valor, LocalDateTime inicio_vigencia, LocalDateTime fim_vigencia) {
         this.produto_id = produto_id;
-        this.supermercado_id = supermercado_id;
-        this.valor = valor;
+        this.nome_produto = nome_produto;
+        this.preco_valor = preco_valor;
         this.inicio_vigencia = inicio_vigencia;
         this.fim_vigencia = fim_vigencia;
     }
 
-    public PrecoDTO() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public ProdutoPrecoDTO() {
     }
 
     public Long getProduto_id() {
@@ -39,20 +28,20 @@ public class PrecoDTO {
         this.produto_id = produto_id;
     }
 
-    public Long getSupermercado_id() {
-        return supermercado_id;
+    public String getNome_produto() {
+        return nome_produto;
     }
 
-    public void setSupermercado_id(Long supermercado_id) {
-        this.supermercado_id = supermercado_id;
+    public void setNome_produto(String nome_produto) {
+        this.nome_produto = nome_produto;
     }
 
-    public Double getValor() {
-        return valor;
+    public Double getPreco_valor() {
+        return preco_valor;
     }
 
-    public void setValor(Double valor) {
-        this.valor = valor;
+    public void setPreco_valor(Double preco_valor) {
+        this.preco_valor = preco_valor;
     }
 
     public LocalDateTime getInicio_vigencia() {

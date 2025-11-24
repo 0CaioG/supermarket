@@ -1,6 +1,7 @@
 package com.example.supermarket.supermarket.services;
 
 import com.example.supermarket.supermarket.dto.PrecoDTO;
+import com.example.supermarket.supermarket.dto.ProdutoPrecoDTO;
 import com.example.supermarket.supermarket.entities.Preco;
 import com.example.supermarket.supermarket.entities.Produto;
 import com.example.supermarket.supermarket.entities.Supermercado;
@@ -10,6 +11,7 @@ import com.example.supermarket.supermarket.repositories.SupermercadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,6 +64,14 @@ public class PrecoService {
 
     public void deletarPreco(Long id){
         precoRepository.deleteById(id);
+    }
+
+    public List<ProdutoPrecoDTO> listarPorVigenciaSupermercado(Long supermercadoId){
+        return precoRepository.buscarProdutosVigentes(supermercadoId, LocalDateTime.now());
+    }
+
+    public List<Preco> listarPorProdutosSupermercados(Long supermercadoId, Long produtoId){
+        return precoRepository.findPrecoBySupermercado_idAndProduto_id(supermercadoId,produtoId);
     }
 
     public Preco fromDTO(PrecoDTO novoPreco){
