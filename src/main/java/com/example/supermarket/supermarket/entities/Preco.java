@@ -2,6 +2,7 @@ package com.example.supermarket.supermarket.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,10 +21,10 @@ public class Preco {
     private Supermercado supermercado;
 
     private Double valor;
-    private LocalDateTime inicio_vigencia;
-    private LocalDateTime fim_vigencia;
+    private LocalDate inicio_vigencia;
+    private LocalDate fim_vigencia;
 
-    public Preco(Long id, Produto produto,Supermercado supermercado, Double valor, LocalDateTime inicio_vigencia, LocalDateTime fim_vigencia) {
+    public Preco(Long id, Produto produto, Supermercado supermercado, Double valor, LocalDate inicio_vigencia, LocalDate fim_vigencia) {
         this.id = id;
         this.supermercado = supermercado;
         this.produto = produto;
@@ -67,19 +68,19 @@ public class Preco {
         this.valor = valor;
     }
 
-    public LocalDateTime getInicio_vigencia() {
+    public LocalDate getInicio_vigencia() {
         return inicio_vigencia;
     }
 
-    public void setInicio_vigencia(LocalDateTime inicio_vigencia) {
+    public void setInicio_vigencia(LocalDate inicio_vigencia) {
         this.inicio_vigencia = inicio_vigencia;
     }
 
-    public LocalDateTime getFim_vigencia() {
+    public LocalDate getFim_vigencia() {
         return fim_vigencia;
     }
 
-    public void setFim_vigencia(LocalDateTime fim_vigencia) {
+    public void setFim_vigencia(LocalDate fim_vigencia) {
         this.fim_vigencia = fim_vigencia;
     }
 }

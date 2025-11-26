@@ -2,6 +2,7 @@ package com.example.supermarket.supermarket.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -14,9 +15,9 @@ public class Supermercado {
 
     private String nome;
     private String cnpj;
-    private LocalDateTime data_criacao;
+    private LocalDate data_criacao;
 
-    public Supermercado(Long id, String nome, String cnpj, LocalDateTime data_criacao) {
+    public Supermercado(Long id, String nome, String cnpj, LocalDate data_criacao) {
         this.id = id;
         this.nome = nome;
         this.cnpj = cnpj;
@@ -50,11 +51,11 @@ public class Supermercado {
         this.cnpj = cnpj;
     }
 
-    public LocalDateTime getData_criacao() {
+    public LocalDate getData_criacao() {
         return data_criacao;
     }
 
-    public void setData_criacao(LocalDateTime data_criacao) {
+    public void setData_criacao(LocalDate data_criacao) {
         this.data_criacao = data_criacao;
     }
 }
