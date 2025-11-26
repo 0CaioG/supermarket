@@ -1,5 +1,6 @@
 package com.example.supermarket.supermarket.controllers;
 
+import com.example.supermarket.supermarket.dto.MercadoDadosDTO;
 import com.example.supermarket.supermarket.dto.ProdutoPrecoDTO;
 import com.example.supermarket.supermarket.entities.Preco;
 import com.example.supermarket.supermarket.entities.Produto;
@@ -36,8 +37,13 @@ public class SupermercadoController {
     }
 
     @GetMapping("/{id}/produtos")
-    private List<ProdutoPrecoDTO> listarProdutosVigentes(@PathVariable Long id){
+    private List<ProdutoPrecoDTO> listarProdutosVigentes(@PathVariable("id") Long id){
         return precoService.listarPorVigenciaSupermercado(id);
+    }
+
+    @GetMapping("/produtos")
+    private List<MercadoDadosDTO> quantidadeProdutosPorMercado(){
+        return precoService.listarProdutosEmSupermercados();
     }
 
     @PostMapping
