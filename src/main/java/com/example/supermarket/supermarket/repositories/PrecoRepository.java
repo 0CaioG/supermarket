@@ -1,5 +1,6 @@
 package com.example.supermarket.supermarket.repositories;
 
+import com.example.supermarket.supermarket.dto.MercadoDadosDTO;
 import com.example.supermarket.supermarket.dto.ProdutoPrecoDTO;
 import com.example.supermarket.supermarket.entities.Preco;
 import com.example.supermarket.supermarket.entities.Produto;
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,10 +30,17 @@ public interface PrecoRepository extends JpaRepository<Preco, Long> {
         )
         FROM Preco p
         WHERE p.supermercado.id = :supermercadoId 
-        AND (p.fim_vigencia > :agora OR p.fim_vigencia IS NULL)
+        AND (p.fim_vigencia > NOW() OR p.fim_vigencia IS NULL)
     """)
     List<ProdutoPrecoDTO> buscarProdutosVigentes(
-            @Param("supermercadoId") Long supermercadoId,
-            @Param("agora") LocalDateTime agora
+            @Param("supermercadoId") Long supermercadoId
     );
+
+    @Query(value="""
+        SELECT s.id, s.nome, COUNT(*) as produtos_cadastrados FROM preco p
+        INNER JOIN supermercado s ON s.id = p.supermercado_id
+        WHERE (p.fim_vigencia > NOW() OR p.fim_vigencia IS NULL)
+        GROUP BY p.supermercado_id
+    """,nativeQuery = true)
+    List<MercadoDadosDTO> buscarQtdProdutosPorSupermercado();
 }

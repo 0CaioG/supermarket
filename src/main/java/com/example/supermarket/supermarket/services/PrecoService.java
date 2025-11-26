@@ -1,5 +1,6 @@
 package com.example.supermarket.supermarket.services;
 
+import com.example.supermarket.supermarket.dto.MercadoDadosDTO;
 import com.example.supermarket.supermarket.dto.PrecoDTO;
 import com.example.supermarket.supermarket.dto.ProdutoPrecoDTO;
 import com.example.supermarket.supermarket.entities.Preco;
@@ -67,11 +68,15 @@ public class PrecoService {
     }
 
     public List<ProdutoPrecoDTO> listarPorVigenciaSupermercado(Long supermercadoId){
-        return precoRepository.buscarProdutosVigentes(supermercadoId, LocalDateTime.now());
+        return precoRepository.buscarProdutosVigentes(supermercadoId);
     }
 
     public List<Preco> listarPorProdutosSupermercados(Long supermercadoId, Long produtoId){
         return precoRepository.findPrecoBySupermercado_idAndProduto_id(supermercadoId,produtoId);
+    }
+
+    public List<MercadoDadosDTO> listarProdutosEmSupermercados(){
+        return precoRepository.buscarQtdProdutosPorSupermercado();
     }
 
     public Preco fromDTO(PrecoDTO novoPreco){
