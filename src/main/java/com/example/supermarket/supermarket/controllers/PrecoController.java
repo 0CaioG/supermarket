@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -46,6 +47,12 @@ public class PrecoController {
 
     @PutMapping("/{id}")
     private Preco atualizarPreco(@PathVariable Long id, @RequestBody PrecoDTO preco){
+        return precoService.atualizarPreco(id,preco);
+    }
+
+    @PutMapping("/{id}/encerrar-vigencia")
+    private Preco encerrarPreco(@PathVariable("id") Long id, @RequestBody PrecoDTO preco){
+        preco.setFim_vigencia(LocalDate.now());
         return precoService.atualizarPreco(id,preco);
     }
 

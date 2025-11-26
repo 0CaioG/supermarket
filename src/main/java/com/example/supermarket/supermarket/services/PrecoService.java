@@ -10,7 +10,9 @@ import com.example.supermarket.supermarket.repositories.PrecoRepository;
 import com.example.supermarket.supermarket.repositories.ProdutoRepository;
 import com.example.supermarket.supermarket.repositories.SupermercadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,6 +31,13 @@ public class PrecoService {
     public SupermercadoRepository supermercadoRepository;
 
     public Preco criarPreco(PrecoDTO novoPreco){
+        if(precoRepository.existeProdutoVigente(novoPreco.getProduto_id(), novoPreco.getSupermercado_id())){
+            throw new ResponseStatusException(
+                HttpStatus.CONFLICT,
+                "Já existe um preço vigente para este produto neste supermercado."
+            );
+
+        }
         return precoRepository.save(fromDTO(novoPreco));
     }
 

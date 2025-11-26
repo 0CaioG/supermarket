@@ -43,4 +43,15 @@ public interface PrecoRepository extends JpaRepository<Preco, Long> {
         GROUP BY p.supermercado_id
     """,nativeQuery = true)
     List<MercadoDadosDTO> buscarQtdProdutosPorSupermercado();
+
+    @Query("""
+        SELECT COUNT(p) > 0
+        FROM Preco p
+        WHERE p.supermercado.id = :supermercado 
+        AND p.produto.id = :produto
+        AND (p.fim_vigencia > NOW() OR p.fim_vigencia IS NULL)
+    """)
+    Boolean existeProdutoVigente(@Param("produto") Long produtoId, @Param("supermercado") Long supermercadoId);
+
+
 }
